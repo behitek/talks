@@ -125,11 +125,11 @@ Bag of Words means representing text using word counts.
 
 Main script:
 
-If two documents use many of the same words, their count patterns may look similar. If they use very different words, their count patterns may look different. This is enough to do some basic comparison, classification, or retrieval tasks. So Bag of Words is not useless. It is a real representation with real value.
+Look at the table. We have three short phrases — "river bank", "bank loan", "loan account". Our vocabulary has eight words: bank, river, loan, account, water, money, flood, credit. Now look at how many cells are zero. Each phrase only touches two of those eight columns. The dimmed zeros are not empty — they are real data points. The model sees them as meaningful absence. In a real corpus of millions of words and thousands of documents, almost every single cell would be zero. That is what sparse means. And there is something else to notice here. Doc A and Doc B both have "bank" — so their count patterns look similar. But one is about a river and one is about finance. Bag of Words cannot see that difference. We will come back to that.
 
 Short backup:
 
-Bag of Words can already help us compare documents in a simple way.
+Most cells are zero — that is sparsity. And two very different documents can look similar just because they share one word.
 
 ### Slide 11: Bag of Words limitations
 
@@ -173,7 +173,7 @@ Sparse methods help, but they do not naturally create semantic neighborhoods.
 
 Transition:
 
-So now we move from counts to vectors.
+Sparse methods give us a useful structure, but they are not enough. Next we talk about representations.
 
 ### 2.2 Geometry of Meaning
 
@@ -187,7 +187,21 @@ Short backup:
 
 word2vec learns vectors, and similar usage can lead to similar vectors.
 
-### Slide 16: Meaning becomes geometry
+### Slide 16: How word2vec learns
+
+Main script:
+
+Now the obvious question is: how does word2vec actually learn those vectors? The answer is through a prediction task. There are two common approaches. The first is CBOW, or Continuous Bag of Words. You give the model several context words around a gap, and it tries to predict the missing center word. The second is Skip-gram. You give the model a center word, and it tries to predict which words tend to appear around it. In both cases, the model has to adjust its internal representation of each word every time it gets a prediction right or wrong. After millions of these adjustments, words that appear in similar situations end up with similar vectors.
+
+Short backup:
+
+word2vec trains by predicting context. The vectors are a side effect of learning to predict.
+
+Transition:
+
+So now we understand where the vectors come from. Next, let us look at what they represent.
+
+### Slide 17: Meaning becomes geometry
 
 Main script:
 
@@ -197,7 +211,7 @@ Short backup:
 
 In embeddings, related usage often becomes closeness in vector space.
 
-### Slide 17: Cluster visual
+### Slide 18: Cluster visual
 
 Main script:
 
@@ -207,7 +221,7 @@ Short backup:
 
 Clusters show that related terms can become neighbors in embedding space.
 
-### Slide 18: Near-versus-far example
+### Slide 19: Near-versus-far example
 
 Main script:
 
@@ -217,7 +231,7 @@ Short backup:
 
 Once we see near and far in the space, we need a way to measure closeness.
 
-### Slide 19: Cosine similarity
+### Slide 20: Cosine similarity
 
 Main script:
 
@@ -227,7 +241,7 @@ Short backup:
 
 Cosine similarity asks how similar the vector directions are.
 
-### Slide 20: What cosine similarity measures
+### Slide 21: What cosine similarity measures
 
 Main script:
 
@@ -237,7 +251,7 @@ Short backup:
 
 High cosine similarity means useful closeness, not human-like understanding.
 
-### Slide 21: Analogy and caveat
+### Slide 22: Analogy and caveat
 
 Main script:
 
@@ -247,7 +261,7 @@ Short backup:
 
 The analogy example is useful, but it reflects learned structure, not real understanding.
 
-### Slide 22: Geometry takeaway
+### Slide 23: Geometry takeaway
 
 Main script:
 
@@ -263,7 +277,7 @@ That brings us to the next problem. What happens when the same word means differ
 
 ### 2.3 Static vs Contextual Embeddings
 
-### Slide 23: Static embedding limitation
+### Slide 24: Static embedding limitation
 
 Main script:
 
@@ -273,7 +287,7 @@ Short backup:
 
 Static embeddings are useful, but one word still gets one fixed representation.
 
-### Slide 24: One word, one vector problem
+### Slide 25: One word, one vector problem
 
 Main script:
 
@@ -283,7 +297,7 @@ Short backup:
 
 One fixed vector compresses different meanings together.
 
-### Slide 25: Contextual embeddings idea
+### Slide 26: Contextual embeddings idea
 
 Main script:
 
@@ -293,7 +307,7 @@ Short backup:
 
 In contextual embeddings, surrounding words help define the representation.
 
-### Slide 26: The bank contrast
+### Slide 27: The bank contrast
 
 Main script:
 
@@ -303,7 +317,41 @@ Short backup:
 
 Same word surface, different context, different meaning.
 
-### Slide 27: Static versus contextual summary
+### Slide 28: BERT introduction
+
+Main script:
+
+So the idea is that surrounding words should influence the representation. That model is BERT — Bidirectional Encoder Representations from Transformers. I am not going to explain the architecture today. What matters for this session is the intuition. word2vec gives "bank" one fixed vector — the same one every time. BERT reads the whole sentence and produces a different vector for "bank" depending on what surrounds it. In "river bank", the representation leans toward geography. In "bank account", it leans toward finance. The word on the surface is identical. The representation is not. That is the key shift.
+
+Short backup:
+
+BERT produces different vectors for the same word depending on the surrounding sentence. word2vec cannot do this.
+
+Transition:
+
+Now, what about the pieces themselves?
+
+### Slide 29: How BERT learns — Masked LM
+
+Main script:
+
+But how does BERT actually learn to do this? BERT is trained using a technique called Masked Language Modeling, or MLM. The idea is simple. Take a sentence, hide one of the words by replacing it with a special MASK token, and ask the model to predict what the hidden word was. For example, in the sentence "He sat by the [MASK] bank", the correct answer is "river". For BERT to predict that correctly, it needs to read the whole surrounding sentence and understand that this is a geographical context, not a financial one. By doing this across billions of sentences, BERT gets very good at encoding context into its representations.
+
+Short backup:
+
+BERT is trained to predict hidden words. To do that it must read the full sentence. That is how contextual representations emerge.
+
+### Slide 30: BPE tokenization
+
+Main script:
+
+Modern models like BERT didn't just change the numbers, they changed the pieces too. Bag of Words and TF-IDF treated each word as a single unit. BERT uses subword tokenization, like Byte Pair Encoding or BPE. Instead of splitting only at spaces, it learns to break words into smaller internal pieces. "river bank" becomes two tokens. But a word like "Nguyễn" might split into two pieces, like Ng and uyễn. This matters because the model does not see raw words — it sees those subword pieces. Before any meaning is calculated, the model already starts with these internal units.
+
+Short backup:
+
+Modern models use BPE to split text into subword pieces, not just whole words. That is the actual starting point.
+
+### Slide 31: Static versus contextual summary
 
 Main script:
 
@@ -313,7 +361,7 @@ Short backup:
 
 Static is fixed. Contextual changes with the sentence.
 
-### Slide 28: Why context matters in practice
+### Slide 32: Why context matters in practice
 
 Main script:
 
@@ -323,7 +371,7 @@ Short backup:
 
 Context matters because real systems depend on meaning in use, not only surface form.
 
-### Slide 29: Return to the opening puzzle
+### Slide 33: Return to the opening puzzle
 
 Main script:
 
@@ -339,7 +387,7 @@ Next, let us test these ideas in a small interactive demo.
 
 ## 3. Guided Interactive Demo
 
-### Slide 30: Demo roadmap
+### Slide 34: Demo roadmap
 
 Main script:
 
@@ -349,7 +397,7 @@ Short backup:
 
 The demo is here to test the ideas from the concept section.
 
-### Slide 31: Tokenization demo framing
+### Slide 35: Tokenization demo framing
 
 Main script:
 
@@ -363,7 +411,7 @@ Suggested live line:
 
 Let us look at how these forms are split, and whether that already changes the model's starting point.
 
-### Slide 32: Embedding similarity framing
+### Slide 36: Embedding similarity framing
 
 Main script:
 
@@ -377,7 +425,7 @@ Suggested live line:
 
 Before we show the score, let us guess what should be close and what should be far.
 
-### Slide 33: Context demo framing
+### Slide 37: Context demo framing
 
 Main script:
 
@@ -391,7 +439,7 @@ Suggested live line:
 
 This is the clearest place where context changes the answer.
 
-### Slide 34: Optional visualization framing
+### Slide 38: Optional visualization framing
 
 Main script:
 
@@ -436,7 +484,7 @@ Now that we have seen tokenization, similarity, and context in one guided flow, 
 
 ## 4. Closing
 
-### Slide 35: Return to the opening puzzle
+### Slide 39: Return to the opening puzzle
 
 Main script:
 
@@ -446,7 +494,7 @@ Short backup:
 
 Now we can answer the original puzzle with a better framework.
 
-### Slide 36: Answer framework
+### Slide 40: Answer framework
 
 Main script:
 
@@ -456,7 +504,7 @@ Short backup:
 
 The answer is tokenization, representation, similarity, and context.
 
-### Slide 37: Reflection and Q&A
+### Slide 41: Reflection and Q&A
 
 Main script:
 
