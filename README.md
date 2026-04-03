@@ -1,42 +1,15 @@
-# 🎤 Talks
+# Talks
 
-A collection of my public talks, slide decks, and live demo notebooks.
-
-🌐 **Website:** [behitek.com](https://behitek.com)
+A collection of public talks, slide decks, and live demo notebooks by **Hieu Nguyen**.
 
 ---
 
-## Talks
+### [NLP Fundamentals](./nlp-fundamentals/) — Apr 2026
 
-| # | Title | Slides | Demo / Code | Date |
-|---|-------|--------|-------------|------|
-| 1 | [NLP Fundamentals](#nlp-fundamentals) | [View Slides](https://behitek.github.io/talks/nlp-fundamentals/) | [Open in Colab](https://colab.research.google.com/github/behitek/talks/blob/main/nlp-fundamentals/nlp-fundamentals-demo.ipynb) | Apr 2026 |
+*Why does the word "bank" seem simple to us, but difficult for a model once meaning depends on context?* This talk builds a practical mental model across three stages: how text becomes numbers (Bag of Words, TF-IDF, BPE tokenization), how meaning becomes geometry (word2vec, cosine similarity, vector space clusters), and why context changes the answer (static vs contextual embeddings, BERT). Includes a guided interactive demo on tokenization, similarity, and context, closing with a four-part resolution framework.
 
----
-
-## NLP Fundamentals
-
-> *An interactive introduction to core Natural Language Processing concepts — from tokenization and word embeddings to semantic similarity.*
-
-### Links
-
-- 📊 **Slides** → [behitek.github.io/talks/nlp-fundamentals](https://behitek.github.io/talks/nlp-fundamentals/)
-- 🧪 **Demo Notebook** → [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/behitek/talks/blob/main/nlp-fundamentals/nlp-fundamentals-demo.ipynb)
-- 📁 **Source** → [`nlp-fundamentals/`](./nlp-fundamentals/)
-
-### What's Covered
-
-| Section | Topic |
-|---------|-------|
-| Part 1 | Tokenization & Byte-Pair Encoding (BPE) |
-| Part 2 | Word Embeddings & Semantic Similarity |
-| Part 3 | Embedding Map — UMAP 2D visualization |
-| Closing | Resolution of the opening "bank" ambiguity puzzle |
+[Slides](https://behitek.github.io/talks/nlp-fundamentals/) · [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/behitek/talks/blob/main/nlp-fundamentals/nlp-fundamentals-demo.ipynb) · [Speaker Transcript](./nlp-fundamentals/nlp-fundamentals-speaker-transcript.md)
 
 ---
 
-## About Me
-
-I'm **Hieu Nguyen** — engineer, speaker, and writer. I blog about AI, software engineering, and investing at [behitek.com](https://behitek.com).
-
-Feel free to open an issue or reach out if you have questions about any talk!
+I'm **Hieu Nguyen** — engineer, speaker, and writer. [behitek.com](https://behitek.com)
