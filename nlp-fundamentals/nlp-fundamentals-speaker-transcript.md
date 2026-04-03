@@ -47,7 +47,7 @@ Please keep this puzzle in mind. We will answer it at the end.
 
 Main script:
 
-This is not only an academic question. This matters in search, retrieval, classification, and many practical systems. Real text is full of ambiguity. The same word can mean different things in different situations. So the challenge is often not only language itself. The challenge is how language is represented inside the model.
+This is not only an academic question. This matters in search, retrieval, classification, and many practical systems. Real text is full of ambiguity. The same word can mean different things in different situations. As highlighted in the core premise on screen, the challenge is often not only language itself. The challenge is how language is represented inside the model.
 
 Short backup:
 
@@ -135,11 +135,11 @@ Most cells are zero — that is sparsity. And two very different documents can l
 
 Main script:
 
-But Bag of Words has clear limits. It does not naturally capture word order. It does not understand that two different words can have related meaning. And it does not handle context well. So it can tell us what appears, but it cannot tell us enough about meaning. This is the first place where we feel the gap between surface form and deeper representation.
+But Bag of Words has clear limits. It does not naturally capture word order. It does not understand that two different words can have related meaning. And it does not handle context well. As highlighted on the right side of the slide, this is the tradeoff of sparse limits: we gain a machine-friendly numeric snapshot, but completely drop human intent. To the model, these are just isolated buckets with no mechanism to connect related meanings. This is the first place where we feel the gap between surface form and deeper representation.
 
 Short backup:
 
-Bag of Words captures appearance, but not enough meaning.
+Bag of Words captures appearance, but drops human intent. To the model, they are just isolated buckets.
 
 ### Slide 12: TF-IDF intuition
 
