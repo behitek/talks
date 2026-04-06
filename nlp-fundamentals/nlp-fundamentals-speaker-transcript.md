@@ -235,11 +235,11 @@ Once we see near and far in the space, we need a way to measure closeness.
 
 Main script:
 
-Once we have vectors, we need a way to compare them. One common method is cosine similarity. The idea is simple. Instead of focusing mainly on raw size, we ask whether two vectors point in a similar direction. If they do, the cosine similarity is high. If they do not, it is lower.
+Once we have vectors, we need a way to compare them. One common method is cosine similarity. The idea is simple. Instead of focusing mainly on raw size, we ask whether two vectors point in a similar direction. As the visual illustrates, a smaller angle between the vectors means a higher cosine similarity. If they do point in a similar direction, the cosine similarity is high. If they do not, it is lower.
 
 Short backup:
 
-Cosine similarity asks how similar the vector directions are.
+Cosine similarity asks how similar the vector directions are—a smaller angle means a higher cosine.
 
 ### Slide 21: What cosine similarity measures
 
@@ -255,11 +255,11 @@ High cosine similarity means useful closeness, not human-like understanding.
 
 Main script:
 
-The classic example is king minus man plus woman is close to queen. This example is memorable because it shows that vector spaces can capture interesting patterns. But we should be careful. The model is learning statistical structure from data. It is not proving that it understands concepts the way a human does. So this example is useful, but it should not be overinterpreted.
+The classic example is king minus man plus woman is close to queen, as illustrated by the vector relationships shown here. This example is memorable because it shows that vector spaces can capture interesting patterns. But we should be careful. The model is learning statistical structure from data. It is not proving that it understands concepts the way a human does. So this example is useful, but it should not be overinterpreted.
 
 Short backup:
 
-The analogy example is useful, but it reflects learned structure, not real understanding.
+The analogy example is useful, but it reflects learned structure, not real understanding. The visual shows how these vectors relate.
 
 ### Slide 23: Geometry takeaway
 
@@ -345,11 +345,11 @@ BERT is trained to predict hidden words. To do that it must read the full senten
 
 Main script:
 
-Modern models like BERT didn't just change the numbers, they changed the pieces too. Bag of Words and TF-IDF treated each word as a single unit. BERT uses subword tokenization, like Byte Pair Encoding or BPE. Instead of splitting only at spaces, it learns to break words into smaller internal pieces. "river bank" becomes two tokens. But a word like "Nguyễn" might split into two pieces, like Ng and uyễn. This matters because the model does not see raw words — it sees those subword pieces. Before any meaning is calculated, the model already starts with these internal units.
+Modern models didn't just change the numbers — they also changed the pieces. Bag of Words and TF-IDF treated each whole word as a single unit. Modern models use subword tokenization instead. There are two common strategies. The first is BPE, or Byte Pair Encoding, used by models like GPT-2. It learns to merge the most frequent pairs of characters or subwords until it reaches a target vocabulary size. The second is WordPiece, used by BERT. It works similarly but marks continuation subwords with a double hash prefix, like hash hash ing. That prefix makes it explicit which pieces belong together as part of one word. For example, the word banking might split into bank and hash hash ing. The hash hash tells you that the second piece is a suffix, not a standalone token. In BPE, the pieces just sit next to each other with no such marker. Before any meaning is calculated, the model already starts with these internal units.
 
 Short backup:
 
-Modern models use BPE to split text into subword pieces, not just whole words. That is the actual starting point.
+Both BPE and WordPiece split rare words into subword pieces. WordPiece uses the ## prefix to mark continuation pieces. That is the actual starting point before meaning begins.
 
 ### Slide 31: Static versus contextual summary
 
