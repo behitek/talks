@@ -355,11 +355,11 @@ Both BPE and WordPiece split rare words into subword pieces. WordPiece uses the 
 
 Main script:
 
-So the contrast is clear. Static embeddings give us one fixed representation for a word. Contextual embeddings allow the representation to shift with the sentence. This is a major reason why modern NLP systems are better at handling ambiguity, nuance, and polysemy.
+So the contrast is clear. The shared image on this slide makes the difference visible with one word: `apple`. In the static view, there is one reusable point, so company and fruit meaning are forced into the same representation. In the contextual view, those meanings can separate because the surrounding words help decide which sense we mean. That is the same reason later examples like `dog bites man` and `man bites dog` no longer collapse into the same bag. Contextual embeddings let the sentence shape the representation, which is why they are better at ambiguity, word order, nuance, and polysemy.
 
 Short backup:
 
-Static is fixed. Contextual changes with the sentence.
+One image, two stories: fixed word vector on the left, sentence-shaped meaning on the right.
 
 ### Slide 32: Why context matters in practice
 
@@ -371,7 +371,7 @@ Short backup:
 
 Context matters because real systems depend on meaning in use, not only surface form.
 
-### Slide 33: Return to the opening puzzle
+### Slide 33: Puzzle checkpoint
 
 Main script:
 
@@ -396,62 +396,6 @@ The purpose of the demo is not to add new theory. The purpose is to make the ear
 Short backup:
 
 The demo is here to test the ideas from the concept section.
-
-### Slide 35: Tokenization demo framing
-
-Main script:
-
-First, tokenization. In the demo, we will compare examples like "bank", "river bank", and "bank account". This is important because the model does not see raw text exactly the way we do. Different strings can break into different token pieces. So even before meaning, the model may already be starting from different internal units.
-
-Short backup:
-
-Different strings can become very different token sequences.
-
-Suggested live line:
-
-Let us look at how these forms are split, and whether that already changes the model's starting point.
-
-### Slide 36: Embedding similarity framing
-
-Main script:
-
-Second, similarity. Here we should use word-level examples that match the static-embedding story better, using the pretrained Facebook fastText showcase. For example, we can compare pairs like "car" and "automobile", "doctor" and "physician", "bank" and "money", or "bank" and "river". Once we have numeric representations, we can compare them with cosine similarity. This lets us compare what the model learned with what we expect as humans.
-
-Short backup:
-
-Similarity lets us compare model representation with human intuition.
-
-Suggested live line:
-
-Before we show the score, let us guess what should be close and what should be far.
-
-### Slide 37: Context demo framing
-
-Main script:
-
-Third, context. This is the most important part of the demo story. We will compare the sentence "He sat by the river bank" with the sentence "She opened a bank account". The word is the same on the surface, but the surrounding words are different. A contextual model should give different representations to the word `bank` in those two sentences.
-
-Short backup:
-
-Same word, different sentence, different representation.
-
-Suggested live line:
-
-This is the clearest place where context changes the answer.
-
-### Slide 38: Optional visualization framing
-
-Main script:
-
-If we include a visualization such as UMAP, I want to make one thing clear. This is only a projection for intuition. It is helpful for seeing patterns, but it is not the full geometry of the original space. So we use it as a teaching aid, not as a perfect explanation.
-
-Short backup:
-
-The visualization is useful, but it is only a projection.
-
-Transition:
-
-After the demo, the important question is not whether the model is right or wrong. The important question is what the representation makes easy, and what it makes hard.
 
 ## Demo-specific transcript
 
@@ -478,13 +422,20 @@ High-level live flow:
 3. context comparison for `bank`
 4. optional embedding map
 
+Suggested live framing while the demo is on screen:
+
+- Tokenization: Compare examples like "bank", "river bank", and "bank account" so the audience can see that different strings can already become different token pieces before meaning shows up.
+- Similarity: Use word-level pairs such as "car" and "automobile", "doctor" and "physician", "bank" and "money", or "bank" and "river", and ask for a guess before revealing the cosine score.
+- Context: Compare "He sat by the river bank" with "She opened a bank account" to show that the same surface word can take on different internal representations when the surrounding words change.
+- Optional map: If you show a UMAP-style view, frame it as intuition only, not the full original geometry.
+
 Transition back to closing:
 
 Now that we have seen tokenization, similarity, and context in one guided flow, we can return to the original puzzle. The question is no longer just whether the model is right or wrong. The better question is what the representation makes easy, and what it makes hard.
 
 ## 4. Closing
 
-### Slide 39: Return to the opening puzzle
+### Slide 35: Return to the opening puzzle
 
 Main script:
 
@@ -494,7 +445,7 @@ Short backup:
 
 Now we can answer the original puzzle with a better framework.
 
-### Slide 40: Answer framework
+### Slide 36: Answer framework
 
 Main script:
 
@@ -504,7 +455,7 @@ Short backup:
 
 The answer is tokenization, representation, similarity, and context.
 
-### Slide 41: Reflection and Q&A
+### Slide 37: Reflection and Q&A
 
 Main script:
 
